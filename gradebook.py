@@ -56,3 +56,116 @@ class Gradebook:
         for student in self.students.values():
             student.display_info()
             print()
+
+# ---------------- Courses ----------------
+
+    def add_course(self, course):
+        self.courses[course.course_code] = course
+        print("Course added successfully.")
+
+    def enroll_student(self, student_id, course_code,):
+
+        if student_id not in self.students:
+            print("Student not found.")
+            return
+
+        if course_code not in self.courses:
+            print("Course not found.")
+            return
+
+        self.students[student_id].enroll_course(course_code)
+        self.courses[course_code].add_student(student_id)
+
+        print("Enrollment completed.")
+
+# ---------------- Assessments ----------------
+
+    def add_assessment(self, course_code, assessment):
+
+        if course_code not in self.courses:
+            print("Course not found.")
+            return
+
+        self.courses[course_code].add_assessment(assessment)
+
+# ---------------- Grades ----------------
+
+    def record_grade(self, student_id, course_code, assessment_title, score):
+
+        if student_id not in self.students:
+            print("Student not found.")
+            return
+
+        if course_code not in self.courses:
+            print("Course not found.")
+            return
+
+        assessment = self.courses[course_code].find_assessment(assessment_title)
+
+        if assessment is None:
+            print("Assessment not found.")
+            return
+
+        if score < 0 or score > assessment.max_score:
+            print("Invalid score.")
+            return
+
+        if student_id not in self.grades:
+            self.grades[student_id] = {}
+
+        if course_code not in self.grades[student_id]:
+            self.grades[student_id][course_code] = {}
+
+        self.grades[student_id][course_code][assessment_title] = score
+
+        print("Grade recorded successfully.")
+
+# ---------------- Average ----------------
+
+    def calculate_average(self, student_id, course_code):
+
+        if student_id not in self.grades:
+            return 0
+
+        if course_code not in self.grades[student_id]:
+            return 0
+
+        total = 0
+        count = 0
+
+        course = self.courses[course_code]
+
+        for assessment in course.assessments:
+
+            if assessment.title in self.grades[student_id][course_code]:
+
+                score = self.grades[student_id][course_code][assessment.title]
+
+                total += assessment.calculate_percentage(score)
+                count += 1
+
+        if count == 0:
+            return 0
+
+        return total / count
+
+# ---------------- Result ----------------
+
+    def get_result(self, average):
+        if average >= self.passing_grade:
+            return "Passed"
+        else:
+            return "Failed"
+
+    def get_letter_grade(self, average):
+
+        if average >= 90:
+            return "A"
+        elif average >= 80:
+            return "B"
+        elif average >= 70:
+            return "C"
+        elif average >= 60:
+            return "D"
+        else:
+            return "F"
