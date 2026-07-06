@@ -172,33 +172,33 @@ class Gradebook:
 
 # ---------------- Report ----------------
 
-def show_report(self, student_id):
+    def show_report(self, student_id):
 
-    if student_id not in self.students:
-        print("Student not found.")
-        return
+        if student_id not in self.students:
+            print("Student not found.")
+            return
 
-    student = self.students[student_id]
+        student = self.students[student_id]
 
-    print("\n===== Student Report =====")
-    print("ID:", student.get_id())
-    print("Name:", student.get_name())
-    print("Email:", student.get_email())
+        print("\n===== Student Report =====")
+        print("ID:", student.get_id())
+        print("Name:", student.get_name())
+        print("Email:", student.get_email())
 
-    for course_code in student.courses:
+        for course_code in student.courses:
 
-        print("\nCourse:", course_code)
+            print("\nCourse:", course_code)
+                  
+            if student_id in self.grades and course_code in self.grades[student_id]:
 
-        if student_id in self.grades and course_code in self.grades[student_id]:
+                for title, score in self.grades[student_id][course_code].items():
+                    print(title, ":", score)
 
-            for title, score in self.grades[student_id][course_code].items():
-                print(title, ":", score)
+                average = self.calculate_average(student_id, course_code)
 
-            average = self.calculate_average(student_id, course_code)
+                print("Average:", round(average, 2))
+                print("Letter Grade:", self.get_letter_grade(average))
+                print("Result:", self.get_result(average))
 
-            print("Average:", round(average, 2))
-            print("Letter Grade:", self.get_letter_grade(average))
-            print("Result:", self.get_result(average))
-
-        if student_id in self.comments:
-            print("Teacher Comment:", self.comments[student_id])
+            if student_id in self.comments:
+                print("Teacher Comment:", self.comments[student_id])
