@@ -5,27 +5,27 @@ class Student:
         self.__email = email
         self.courses = []
 
-def get_id(self):
+    def get_id(self):
         return self.__student_id
 
-def get_name(self):
+    def get_name(self):
         return self.__name
 
-def get_email(self):
+    def get_email(self):
         return self.__email
 
-def set_email(self, email):
+    def set_email(self, email):
         if "@" in email and "." in email:
             self.__email = email
             print("Email updated successfully.")
         else:
             print("Invalid email address.")
 
-def enroll_course(self, course_code):
+    def enroll_course(self, course_code):
         if course_code not in self.courses:
             self.courses.append(course_code)
 
-def display_info(self):
+    def display_info(self):
         print("Student ID:", self.__student_id)
         print("Name:", self.__name)
         print("Email:", self.__email)
