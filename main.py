@@ -21,6 +21,7 @@ while True:
     print("9. Record Grade")
     print("10. View Student Report")
     print("11. Dashboard")
+    print("12. Student Ranking")
 
 
     choice = input("Choose an option: ")
@@ -120,10 +121,11 @@ while True:
         )
 
     elif choice == "10":
-
         student_id = input("Student ID: ")
         gradebook.show_report(student_id)
 
     elif choice == "11":
-        
         gradebook.dashboard()
+
+    elif choice == "12":
+        gradebook.ranking()
