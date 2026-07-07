@@ -71,6 +71,7 @@ The project uses:
 '''bash
 
 python main.py
+
 '''
 
 4. Use the menu to manage students, courses, assessments, and grades.
