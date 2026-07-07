@@ -12,6 +12,8 @@ class Gradebook:
         self.courses = {}
         self.grades = {}
         self.passing_grade = 55
+        self.attendance = {}
+        self.comments = {}
 
 # ---------------- Students ----------------
 
@@ -258,3 +260,30 @@ class Gradebook:
         for name, avg in ranking_list:
             print(f"{rank}. {name} - {avg}")
             rank += 1
+
+    #---------------- Attendance ---------------
+    
+    def mark_attendance(self, student_id, status):
+
+        if student_id not in self.students:
+            print("Student not found.")
+            return
+
+        self.attendance[student_id] = status
+        print("Attendance recorded.")
+
+    def show_attendance(self):
+
+        print("\n===== Attendance =====")
+
+        for student_id, status in self.attendance.items():
+            print(student_id, "-", self.students[student_id].get_name(), "-", status)
+
+    def add_comment(self, student_id, comment):
+
+        if student_id not in self.students:
+            print("Student not found.")
+            return
+
+        self.comments[student_id] = comment
+        print("Comment added successfully.") 
