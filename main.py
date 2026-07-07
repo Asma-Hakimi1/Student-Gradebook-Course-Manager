@@ -22,6 +22,10 @@ while True:
     print("10. View Student Report")
     print("11. Dashboard")
     print("12. Student Ranking")
+    print("13. Mark Attendance")
+    print("14. View Attendance")
+    print("15. Add Teacher Comment")
+    print("0. Exit")
 
 
     choice = input("Choose an option: ")
@@ -129,3 +133,44 @@ while True:
 
     elif choice == "12":
         gradebook.ranking()
+
+    elif choice == "13":
+
+        student_id = input("Student ID: ")
+
+        print("1. Present")
+        print("2. Absent")
+        print("3. Late")
+
+        choice = input("Choose status: ")
+
+        if choice == "1":
+            status = "Present"
+        elif choice == "2":
+            status = "Absent"
+        elif choice == "3":
+            status = "Late"
+        else:
+            print("Invalid choice.")
+            continue
+
+        gradebook.mark_attendance(student_id, status)
+       
+    elif choice == "14":
+
+        gradebook.show_attendance()
+
+    elif choice == "15":
+
+        student_id = input("Student ID: ")
+        comment = input("Teacher Comment: ")
+
+        gradebook.add_comment(student_id, comment)
+
+    elif choice == "0":
+
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice.")
