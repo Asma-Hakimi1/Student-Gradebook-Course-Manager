@@ -20,6 +20,7 @@ while True:
     print("8. Add Assessment")
     print("9. Record Grade")
     print("10. View Student Report")
+    print("11. Dashboard")
 
 
     choice = input("Choose an option: ")
@@ -122,3 +123,7 @@ while True:
 
         student_id = input("Student ID: ")
         gradebook.show_report(student_id)
+
+    elif choice == "11":
+        
+        gradebook.dashboard()
