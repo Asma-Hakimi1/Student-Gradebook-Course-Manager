@@ -69,6 +69,7 @@ The project uses:
 3. Run:
 
 '''bash
+
 python main.py
 '''
 
