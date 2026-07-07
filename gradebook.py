@@ -216,3 +216,45 @@ class Gradebook:
         print("Total Students:", len(self.students))
         print("Total Courses:", len(self.courses))
         print("Total Assessments:", total_assessments)
+
+    # ---------------- Ranking ----------------
+
+    def ranking(self):
+
+        ranking_list = []
+
+        for student_id in self.students:
+
+            total = 0
+            count = 0
+
+            if student_id in self.grades:
+
+                for course_code in self.grades[student_id]:
+
+                    average = self.calculate_average(student_id, course_code)
+
+                    total += average
+                    count += 1
+
+            if count > 0:
+                final_average = total / count
+            else:
+                final_average = 0
+
+            ranking_list.append(
+                (
+                    self.students[student_id].get_name(),
+                    round(final_average, 2)
+                )
+            )
+
+        ranking_list.sort(key=lambda x: x[1], reverse=True)
+
+        print("\n===== Student Ranking =====")
+
+        rank = 1
+
+        for name, avg in ranking_list:
+            print(f"{rank}. {name} - {avg}")
+            rank += 1
