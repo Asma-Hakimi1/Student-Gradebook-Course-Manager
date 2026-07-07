@@ -202,3 +202,17 @@ class Gradebook:
 
             if student_id in self.comments:
                 print("Teacher Comment:", self.comments[student_id])
+
+# ---------------- Dashboard ----------------
+
+    def dashboard(self):
+
+        total_assessments = 0
+
+        for course in self.courses.values():
+            total_assessments += len(course.assessments)
+
+        print("\n===== Dashboard =====")
+        print("Total Students:", len(self.students))
+        print("Total Courses:", len(self.courses))
+        print("Total Assessments:", total_assessments)
